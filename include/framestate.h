@@ -217,13 +217,18 @@ class
 			*/
 			inline void rgb2rgbw()
 			{
-				color.W = min(channelCorrection.red[color.R],
-								min(channelCorrection.green[color.G],
-									channelCorrection.blue[color.B]));
+				color.W = min(channelCorrection.red[color.R], min(channelCorrection.green[color.G], channelCorrection.blue[color.B]));
 				color.R -= channelCorrection.red[color.W];
 				color.G -= channelCorrection.green[color.W];
 				color.B -= channelCorrection.blue[color.W];
 				color.W = channelCorrection.white[color.W];
+
+				uint8_t blue = color.B;
+
+				color.B = color.G;
+				color.G = color.R;
+				color.R = color.W;
+				color.W = blue;
 			}
 		#endif
 

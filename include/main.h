@@ -35,6 +35,7 @@
 #include "statistics.h"
 #include "base.h"
 #include "framestate.h"
+#include "powercontrol.h"
 
 /**
  * @brief shandling serial communication
@@ -50,6 +51,8 @@ void serialTaskHandler()
 		base.queueEnd = incomingSize;
 		base.queueCurrent = 0;
 	}
+
+	powerControl.update(incomingSize > 0);
 }
 
 /**
